@@ -68,6 +68,10 @@ namespace MudBlazor
         private bool FullScreen { get; set; }
         private bool FullWidth { get; set; }
 
+        private string? _AriaLabelledById;
+        private string? AriaLabelledById => NoHeader || TitleContent != null ? null : 
+            (_AriaLabelledById ??= $"_{Guid.NewGuid().ToString("N")}");
+
 
         protected override void OnInitialized()
         {
