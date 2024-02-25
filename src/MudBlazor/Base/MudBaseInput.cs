@@ -440,6 +440,12 @@ namespace MudBlazor
             return changed;
         }
 
+        /// <summary>
+        /// A slot for multiple adorments
+        /// </summary>
+        [Parameter]
+        public RenderFragment AdormentContent { get; set; }
+
         protected override Task ValidateValue()
         {
             if (SubscribeToParentForm)

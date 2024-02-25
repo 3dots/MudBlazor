@@ -1,23 +1,28 @@
 ﻿@namespace MudBlazor.Internal
 
-
-
 <div class="@Class">
-    @if (!string.IsNullOrWhiteSpace(Text))
+    @if (AdormentContent != null)
     {
-        <MudText Color="@Color" tabindex="-1">@Text</MudText>
+        @AdormentContent
     }
-    else if (!string.IsNullOrWhiteSpace(Icon))
+    else
     {
-        @if (AdornmentClick.HasDelegate)
+        @if (!string.IsNullOrWhiteSpace(Text))
         {
-            <MudIconButton Icon="@Icon" OnClick="@AdornmentClick" Edge="@Edge" Size="@Size" Color="@Color" aria-label="@(!string.IsNullOrEmpty(AriaLabel) ? AriaLabel : "Icon Button")" tabindex="-1"/>
+            <MudText Color="@Color" tabindex="-1">@Text</MudText>
         }
-        else
+        else if (!string.IsNullOrWhiteSpace(Icon))
         {
-            <MudIcon Icon="@Icon" Size="@Size" Color="@Color" aria-label="@(!string.IsNullOrEmpty(AriaLabel) ? AriaLabel : "Icon")" tabindex="-1"/>
+            @if (AdornmentClick.HasDelegate)
+            {
+                <MudIconButton Icon="@Icon" OnClick="@AdornmentClick" Edge="@Edge" Size="@Size" Color="@Color" aria-label="@(!string.IsNullOrEmpty(AriaLabel) ? AriaLabel : "Icon Button")" tabindex="-1" />
+            }
+            else
+            {
+                <MudIcon Icon="@Icon" Size="@Size" Color="@Color" aria-label="@(!string.IsNullOrEmpty(AriaLabel) ? AriaLabel : "Icon")" tabindex="-1" />
+            }
         }
-    }
+    }   
 </div>
 
 
@@ -31,4 +36,10 @@
     [Parameter] public string AriaLabel { get; set; }
 
     [Parameter] public EventCallback<MouseEventArgs> AdornmentClick { get; set; }
+
+    /// <summary>
+    /// A slot for multiple adorments
+    /// </summary>
+    [Parameter]
+    public RenderFragment AdormentContent { get; set; }
 }

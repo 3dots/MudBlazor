@@ -14,7 +14,7 @@
                 Edge="@Edge.Start" 
                 AdornmentClick="@OnAdornmentClick" 
                 AriaLabel="@AdornmentAriaLabel"
-        />
+                AdormentContent="@AdormentContent" />
 	}
 
 	@if (Lines > 1)
@@ -125,7 +125,7 @@
                 Edge="@Edge.End" 
                 AdornmentClick="@OnAdornmentClick" 
                 AriaLabel="@AdornmentAriaLabel"
-        />
+                AdormentContent="@AdormentContent" />
 	}
 
 	@if (Variant == Variant.Outlined)
