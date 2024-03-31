@@ -1105,5 +1105,8 @@ namespace MudBlazor
             }
         }
 
+        bool IsDefaultEnumRender => ChildContent == null && typeof(T).IsEnum;
+        IEnumerable<T> EnumValues => Enum.GetValues(typeof(T)).Cast<T>();
+
     }
 }

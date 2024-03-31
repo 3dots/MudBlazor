@@ -30,7 +30,7 @@
 								<MudListItem Icon="@SelectAllCheckBoxIcon" Text="@SelectAllText" OnClick="SelectAllClickAsync" OnClickHandlerPreventDefault="true" Dense="@Dense" Class="mb-2" />
                                 <MudDivider />
 							}
-							@ChildContent
+                            @ChildContentRender()
 						</MudList>
 					</CascadingValue>
 				</MudPopover>
@@ -40,10 +40,36 @@
     @*Shadow select items for IsValueInList and CanRenderValue*@
     <CascadingValue Value="@((IMudShadowSelect)this)" IsFixed="true">
         <CascadingValue Name="HideContent" Value="true">
-			@ChildContent
-		</CascadingValue>
+            @ChildContentRender()
+        </CascadingValue>
 	</CascadingValue>
 
 </CascadingValue>
 <!-- mousedown instead of click needed to close the menu before OnLostFocus runs -->
 <MudOverlay Visible="_isOpen" @onmousedown="@(() => CloseMenu(false))" LockScroll="@LockScroll" />
+
+
+@code {
+
+    public RenderFragment ChildContentRender()
+    {
+        if (ChildContent != null)
+        {
+            return ChildContent;
+        }
+        else if (IsDefaultEnumRender)
+        {
+            return @<text>
+                @foreach (T en in EnumValues)
+                {
+                <MudSelectItem Value="en" />
+                }
+            </text>;
+        }
+        else
+        {
+            return null;
+        }      
+    }
+
+}
